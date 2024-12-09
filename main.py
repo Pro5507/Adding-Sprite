@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from pygame.sprite import _Group
+from pygame.sprite import Group
 
 pygame.init()
 
@@ -52,4 +52,28 @@ class Sprite(pygame.sprite.Sprite):
     sp1= Sprite(GREEN, 20, 30)
     sp1.rect.x= random.randint(0, 480)
     sp1.rect.y= random.randint(0, 370)
-    
+    all_sprite_list.add(sp1)
+
+    pygame.display.set_mode((500, 400)) 
+    pygame.display.set_caption("Boundary Sprite") 
+    bg_color= LIGHTBLUE 
+    screen.fill(bg_color)
+
+
+    exit=False 
+    pygame.time.Clock()
+
+    while not exit:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit= True
+            elif event.type == SPRITE_COLOR_CHANGE_EVENT:
+                 sp1.change_color()
+            elif event.type == BACKGROUND_COLOR_CHANGE_EVENT:
+                 change_background_color()
+            all_sprites_list.update()
+            screen.fill(bg_color)
+            all_sprites_list.draw(screen)
+            pygame.display.flip()
+            clock.tick(240)
+pygame.quit()
